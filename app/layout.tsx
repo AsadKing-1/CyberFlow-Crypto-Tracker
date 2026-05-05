@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "@/styles/globals.css";
+
+import LandingHeader from "@/shared/LandingHeader/LandingHeader";
 
 export const metadata: Metadata = {
   title: "CyberFlow",
@@ -13,7 +15,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className="bg-surface-container-lowest">
+        <LandingHeader />
+        {children}
+      </body>
     </html>
   );
 }
