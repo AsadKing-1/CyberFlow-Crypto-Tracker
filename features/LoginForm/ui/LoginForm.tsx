@@ -1,0 +1,143 @@
+import Link from "next/link"
+
+
+const inputClass = "w-full rounded-lg border border-white/10 bg-surface-container-low/80 py-3 pl-11 pr-4 text-sm text-white outline-none transition-all duration-200 placeholder:text-gray-500 focus:border-primary/70 focus:bg-surface-container focus:ring-2 focus:ring-primary/30"
+const iconClass = "pointer-events-none absolute left-3.5 top-1/2 size-5 -translate-y-1/2 text-gray-500 transition-colors duration-200 peer-focus:text-primary"
+
+
+export default function LoginForm() {
+    return (
+        <div className="w-full px-4">
+            <form className="glass-card relative mx-auto w-full max-w-md overflow-hidden rounded-lg border-primary/20 p-6 shadow-[0_0_45px_rgba(0,255,163,0.08)] sm:p-8">
+                <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-transparent via-primary to-transparent" />
+
+                <div className="flex flex-col items-center text-center">
+                    <span className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg border border-primary/30 bg-primary-container text-primary shadow-neon-primary">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                            className="size-6"
+                        >
+                            <path
+                                fillRule="evenodd"
+                                d="M12 2.25a5.25 5.25 0 0 0-5.25 5.25v3a3 3 0 0 0-3 3v6.75a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3v-6.75a3 3 0 0 0-3-3v-3c0-2.9-2.35-5.25-5.25-5.25Zm3.75 8.25v-3a3.75 3.75 0 1 0-7.5 0v3h7.5Z"
+                                clipRule="evenodd"
+                            />
+                        </svg>
+                    </span>
+                    <h1 className="text-3xl font-semibold text-white sm:text-4xl">
+                        Welcome Back
+                    </h1>
+                    <p className="mt-2 max-w-xs text-sm leading-6 text-gray-400">
+                        Sign in to continue your secure trading flow.
+                    </p>
+                </div>
+
+                <div className="mt-7 flex flex-col gap-4">
+                    <div className="flex flex-col gap-2">
+                        <label
+                            className="text-sm font-medium text-gray-300"
+                            htmlFor="email"
+                        >
+                            Email Address
+                        </label>
+                        <div className="relative">
+                            <input
+                                id="email"
+                                name="email"
+                                placeholder="jane@cyberflow.io"
+                                type="email"
+                                autoComplete="email"
+                                className={`${inputClass} peer`}
+                                required
+                            />
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                className={iconClass}
+                            >
+                                <path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z" />
+                                <path d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div className="flex flex-col gap-2">
+                        <label
+                            className="text-sm font-medium text-gray-300"
+                            htmlFor="password"
+                        >
+                            Password
+                        </label>
+                        <div className="relative">
+                            <input
+                                id="password"
+                                name="password"
+                                placeholder="••••••••"
+                                type="password"
+                                autoComplete="current-password"
+                                className={`${inputClass} peer`}
+                                required
+                                minLength={8}
+                            />
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="currentColor"
+                                className={iconClass}
+                            >
+                                <path
+                                    fillRule="evenodd"
+                                    d="M12 1.5a5.25 5.25 0 0 0-5.25 5.25v3a3 3 0 0 0-3 3v6.75a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3v-6.75a3 3 0 0 0-3-3v-3c0-2.9-2.35-5.25-5.25-5.25Zm3.75 8.25v-3a3.75 3.75 0 1 0-7.5 0v3h7.5Z"
+                                    clipRule="evenodd"
+                                />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="mt-6 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                        <input
+                            type="checkbox"
+                            name="remember"
+                            id="remember"
+                            className="size-4 rounded border-white/20 bg-surface-container-low/60 checked:border-primary checked:bg-primary focus:ring-2 focus:ring-primary/50"
+                        />
+                        <label
+                            htmlFor="remember"
+                            className="text-sm text-gray-400"
+                        >
+                            Remember me
+                        </label>
+                    </div>
+                    <Link
+                        href="/auth/forgot-password"
+                        className="text-sm font-medium text-primary transition-colors hover:text-primary/80"
+                    >
+                        Forgot password?
+                    </Link>
+                </div>
+
+                <button
+                    type="submit"
+                    className="mt-8 w-full rounded-lg bg-primary py-3 text-base font-semibold text-on-primary shadow-lg shadow-primary/20 transition-all duration-200 hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/30 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-surface-container-high"
+                >
+                    Sign In
+                </button>
+            </form>
+
+            <p className="mt-6 text-center text-sm text-gray-500">
+                Don&apos;t have an account?{" "}
+                <Link
+                    href="/auth/register"
+                    className="font-semibold text-primary transition-colors hover:text-primary/80"
+                >
+                    Create an account
+                </Link>
+            </p>
+        </div>
+    )
+}
