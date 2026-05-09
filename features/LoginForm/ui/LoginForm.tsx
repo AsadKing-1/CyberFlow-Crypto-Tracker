@@ -1,14 +1,44 @@
-import Link from "next/link"
+"use client"
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { loginSchema, type LoginFormData } from "@/lib/validator";
 
+import { login } from "@/app/auth/actions";
+import { useState } from "react";
+
+import Link from "next/link"
 
 const inputClass = "w-full rounded-lg border border-white/10 bg-surface-container-low/80 py-3 pl-11 pr-4 text-sm text-white outline-none transition-all duration-200 placeholder:text-gray-500 focus:border-primary/70 focus:bg-surface-container focus:ring-2 focus:ring-primary/30"
 const iconClass = "pointer-events-none absolute left-3.5 top-1/2 size-5 -translate-y-1/2 text-gray-500 transition-colors duration-200 peer-focus:text-primary"
 
-
 export default function LoginForm() {
+    const [serverError, setServerError] = useState<string | null>(null);
+    const {
+        register,
+        handleSubmit,
+        formState: { errors, isSubmitting },
+    } = useForm<LoginFormData>({
+        resolver: zodResolver(loginSchema),
+    })
+
+    const onSubmit = async (data: LoginFormData) => {
+        setServerError("");
+
+        const formData = new FormData();
+
+        formData.append("email", data.email);
+        formData.append("password", data.password);
+
+        const result = await login(formData);
+
+        if (result?.error) {
+            setServerError(result.error);
+        }
+    }
+
     return (
         <div className="w-full px-4">
-            <form className="glass-card relative mx-auto w-full max-w-md overflow-hidden rounded-lg border-primary/20 p-6 shadow-[0_0_45px_rgba(0,255,163,0.08)] sm:p-8">
+            <form onSubmit={handleSubmit(onSubmit)} className="glass-card relative mx-auto w-full max-w-md overflow-hidden rounded-lg border-primary/20 p-6 shadow-[0_0_45px_rgba(0,255,163,0.08)] sm:p-8">
                 <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-transparent via-primary to-transparent" />
 
                 <div className="flex flex-col items-center text-center">
@@ -44,6 +74,7 @@ export default function LoginForm() {
                         </label>
                         <div className="relative">
                             <input
+                                {...register("email")}
                                 id="email"
                                 name="email"
                                 placeholder="jane@cyberflow.io"
@@ -62,6 +93,7 @@ export default function LoginForm() {
                                 <path d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z" />
                             </svg>
                         </div>
+                        {errors.email && <span className="text-red-500 text-sm">{errors.email.message}</span>}
                     </div>
 
                     <div className="flex flex-col gap-2">
@@ -73,6 +105,7 @@ export default function LoginForm() {
                         </label>
                         <div className="relative">
                             <input
+                                {...register("password")}
                                 id="password"
                                 name="password"
                                 placeholder="••••••••"
@@ -95,30 +128,8 @@ export default function LoginForm() {
                                 />
                             </svg>
                         </div>
+                        {errors.password && <span className="text-red-500 text-sm">{errors.password.message}</span>}
                     </div>
-                </div>
-
-                <div className="mt-6 flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                        <input
-                            type="checkbox"
-                            name="remember"
-                            id="remember"
-                            className="size-4 rounded border-white/20 bg-surface-container-low/60 checked:border-primary checked:bg-primary focus:ring-2 focus:ring-primary/50"
-                        />
-                        <label
-                            htmlFor="remember"
-                            className="text-sm text-gray-400"
-                        >
-                            Remember me
-                        </label>
-                    </div>
-                    <Link
-                        href="/auth/forgot-password"
-                        className="text-sm font-medium text-primary transition-colors hover:text-primary/80"
-                    >
-                        Forgot password?
-                    </Link>
                 </div>
 
                 <button
