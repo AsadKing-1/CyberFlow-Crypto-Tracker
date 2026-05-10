@@ -40,7 +40,7 @@ export async function signup(formData: FormData) {
 
     if (error) {
         return { error: error.message };
+    }else{
+        redirect("/dashboard")
     }
-
-    redirect("/dashboard");
 }

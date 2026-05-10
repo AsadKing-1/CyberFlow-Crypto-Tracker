@@ -22,7 +22,7 @@ export default function LoginForm() {
     })
 
     const onSubmit = async (data: LoginFormData) => {
-        setServerError("");
+        setServerError(null);
 
         const formData = new FormData();
 
@@ -133,11 +133,14 @@ export default function LoginForm() {
                 </div>
 
                 <button
+                    disabled={isSubmitting}
                     type="submit"
-                    className="mt-8 w-full rounded-lg bg-primary py-3 text-base font-semibold text-on-primary shadow-lg shadow-primary/20 transition-all duration-200 hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/30 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-surface-container-high"
+                    className="mt-8 w-full rounded-lg bg-primary py-3 text-base font-semibold text-on-primary shadow-lg shadow-primary/20 transition-all duration-200 hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/30 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-surface-container-high disabled:cursor-not-allowed disabled:bg-gray-400 disabled:text-gray-200 disabled:shadow-none disabled:hover:bg-gray-400"
                 >
-                    Sign In
+                    {isSubmitting ? "Signing in..." : "Sign In"}
                 </button>
+
+                {serverError && <p className="mt-4 text-sm text-red-500">{serverError}</p>}
             </form>
 
             <p className="mt-6 text-center text-sm text-gray-500">
