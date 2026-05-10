@@ -60,7 +60,7 @@ export default function LoginForm() {
                         Welcome Back
                     </h1>
                     <p className="mt-2 max-w-xs text-sm leading-6 text-gray-400">
-                        Sign in to continue your secure trading flow.
+                        Sign in to continue to your market dashboard.
                     </p>
                 </div>
 

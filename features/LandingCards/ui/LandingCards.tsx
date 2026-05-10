@@ -4,10 +4,10 @@ export default function LandingCards() {
             <div className="flex flex-col gap-3 md:gap-4">
                 <div className="flex flex-col py-12 items-center justify-center gap-4 px-5">
                     <h2 className="text-3xl md:text-5xl text-center text-white font-extrabold tracking-tight [text-shadow:0_0_15px_rgba(255,255,255,0.3)]">
-                        Engineered for <span className="text-transparent bg-clip-text bg-linear-to-r from-white via-primary to-white [text-shadow:0_0_20px_var(--color-primary)]">Dominance</span>
+                        Built for <span className="text-transparent bg-clip-text bg-linear-to-r from-white via-primary to-white [text-shadow:0_0_20px_var(--color-primary)]">Market Clarity</span>
                     </h2>
                     <p className="text-gray-400 px-5 text-center text-lg md:text-xl font-medium max-w-2xl mt-1">
-                        Built from the ground up to provide traders with the ultimate edge.
+                        Follow price action, compare assets, and understand market movement without placing trades inside the app.
                     </p>
                 </div>
                 <div className="flex flex-col gap-6 px-5 md:flex-row md:justify-center w-full max-w-7xl mx-auto">
@@ -21,10 +21,10 @@ export default function LandingCards() {
                                 </svg>
                             </div>
                             <h3 className="relative z-10 text-2xl text-white font-bold mt-2">
-                                Ultra-Secure
+                                Account Privacy
                             </h3>
                             <p className="relative z-10 text-gray-400 text-base font-medium leading-relaxed">
-                                Multi-layered cryptographic protection and audited smart contracts ensure your assets are impenetrable.
+                                Keep your saved watchlists and dashboard preferences tied to your account while market data stays easy to scan.
                             </p>
                         </div>
                     </div>
@@ -41,7 +41,7 @@ export default function LandingCards() {
                                 Real-Time Analytics
                             </h3>
                             <p className="relative z-10 text-gray-400 text-base font-medium leading-relaxed">
-                                Sub-milisecond data feeds and advanced charting tools to keep you ahead of market movements.
+                                Live market data and clean charting tools help you follow price changes, volume, and momentum.
                             </p>
                         </div>
                     </div>
@@ -55,10 +55,10 @@ export default function LandingCards() {
                                 </svg>
                             </div>
                             <h3 className="relative z-10 text-2xl text-white font-bold mt-2">
-                                Global Liquidity
+                                Market Overview
                             </h3>
                             <p className="relative z-10 text-gray-400 text-base font-medium leading-relaxed">
-                                Tap into a deep pool of capital with instant execution, ensuring you always get the best price.
+                                Compare major cryptocurrencies by price, market cap, daily change, and trend signals from one dashboard.
                             </p>
                         </div>
                     </div>

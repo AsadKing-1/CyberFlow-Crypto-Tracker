@@ -60,7 +60,7 @@ export default function RegisterForm() {
                         Join <span className="text-primary">CyberFlow</span>
                     </h1>
                     <p className="mt-2 max-w-xs text-sm leading-6 text-gray-400">
-                        Create your account and enter the secure trading flow.
+                        Create your account and start tracking the market.
                     </p>
                 </div>
 
