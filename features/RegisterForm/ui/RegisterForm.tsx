@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState, useSyncExternalStore } from "react";
 import { useForm } from "react-hook-form";
 
-import { signup } from "@/app/auth/actions";
+import { signup } from "@/app/(landing)/auth/actions";
 import { registerSchema, type RegisterFormData } from "@/lib/validator";
 
 const inputClass = "w-full rounded-lg border border-white/10 bg-surface-container-low/80 py-3 pl-11 pr-4 text-sm text-white outline-none transition-all duration-200 placeholder:text-gray-500 focus:border-primary/70 focus:bg-surface-container focus:ring-2 focus:ring-primary/30";

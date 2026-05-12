@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema, type LoginFormData } from "@/lib/validator";
 
-import { login } from "@/app/auth/actions";
+import { login } from "@/app/(landing)/auth/actions";
 import { useState } from "react";
 
 import Link from "next/link"

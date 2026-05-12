@@ -1,7 +1,20 @@
 import { createServerClient } from '@supabase/ssr'
 import { NextResponse, type NextRequest } from 'next/server'
 
+function redirectWithCookies(request: NextRequest, response: NextResponse, pathname: string) {
+    const url = request.nextUrl.clone()
+    url.pathname = pathname
+
+    const redirectResponse = NextResponse.redirect(url)
+    response.cookies.getAll().forEach(({ name, value, ...options }) => {
+        redirectResponse.cookies.set(name, value, options)
+    })
+
+    return redirectResponse
+}
+
 export default async function proxy(request: NextRequest) {
+    const { pathname } = request.nextUrl
     let supabaseResponse = NextResponse.next({
         request,
     })
@@ -27,7 +40,18 @@ export default async function proxy(request: NextRequest) {
         }
     )
 
-    await supabase.auth.getUser()
+    const { data: { user } } = await supabase.auth.getUser()
+    const isProtectedRoute = ['/dashboard', '/market', '/top'].some((route) =>
+        pathname.startsWith(route)
+    )
+
+    if (!user && isProtectedRoute) {
+        return redirectWithCookies(request, supabaseResponse, '/auth/login')
+    }
+
+    if (user && pathname.startsWith('/auth')) {
+        return redirectWithCookies(request, supabaseResponse, '/dashboard')
+    }
 
     return supabaseResponse
 }
