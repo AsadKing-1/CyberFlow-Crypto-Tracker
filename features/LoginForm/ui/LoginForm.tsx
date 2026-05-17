@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema, type LoginFormData } from "@/lib/validator";
 
-import { login } from "@/app/(landing)/auth/actions";
+import { login } from "@/app/auth/actions";
 import { useState } from "react";
 
 import Link from "next/link"
@@ -24,15 +24,21 @@ export default function LoginForm() {
     const onSubmit = async (data: LoginFormData) => {
         setServerError(null);
 
-        const formData = new FormData();
+        try {
+            const formData = new FormData();
+            formData.append("email", data.email);
+            formData.append("password", data.password);
 
-        formData.append("email", data.email);
-        formData.append("password", data.password);
+            const result = await login(formData);
 
-        const result = await login(formData);
-
-        if (result?.error) {
-            setServerError(result.error);
+            if (result?.error) {
+                setServerError(result.error);
+            } else {
+                window.location.href = "/dashboard";
+            }
+        } catch (error: any) {
+            console.error("Login exception:", error);
+            setServerError(error.message || "An unexpected error occurred during login.");
         }
     }
 

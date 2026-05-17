@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState, useSyncExternalStore } from "react";
 import { useForm } from "react-hook-form";
 
-import { signup } from "@/app/(landing)/auth/actions";
+import { signup } from "@/app/auth/actions";
 import { registerSchema, type RegisterFormData } from "@/lib/validator";
 
 const inputClass = "w-full rounded-lg border border-white/10 bg-surface-container-low/80 py-3 pl-11 pr-4 text-sm text-white outline-none transition-all duration-200 placeholder:text-gray-500 focus:border-primary/70 focus:bg-surface-container focus:ring-2 focus:ring-primary/30";
@@ -30,15 +30,22 @@ export default function RegisterForm() {
     const onSubmit = async (data: RegisterFormData) => {
         setServerError(null);
 
-        const formData = new FormData();
-        formData.append("username", data.username);
-        formData.append("email", data.email);
-        formData.append("password", data.password);
+        try {
+            const formData = new FormData();
+            formData.append("username", data.username);
+            formData.append("email", data.email);
+            formData.append("password", data.password);
 
-        const result = await signup(formData);
+            const result = await signup(formData);
 
-        if (result?.error) {
-            setServerError(result.error);
+            if (result?.error) {
+                setServerError(result.error);
+            } else {
+                window.location.href = "/dashboard";
+            }
+        } catch (error: any) {
+            console.error("Signup exception:", error);
+            setServerError(error.message || "An unexpected error occurred during signup.");
         }
     };
 
