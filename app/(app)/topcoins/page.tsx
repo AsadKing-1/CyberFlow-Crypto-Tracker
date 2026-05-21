@@ -1,5 +1,6 @@
-import CryptoCards from "@/features/CryptoCards/ui/CryptoCards"
-import SearchCoin from "@/features/SearchCoin/ui/SearchCoin"
+import CryptoCards from "@/features/CryptoCards/ui/CryptoCards";
+import SearchCoin from "@/features/SearchCoin/ui/SearchCoin";
+
 
 export default function TopCoinsPage() {
     return (

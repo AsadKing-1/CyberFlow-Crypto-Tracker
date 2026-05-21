@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { createPortal } from "react-dom";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import LogoutButton from "@/shared/LogoutButton/LogoutButton";
@@ -38,12 +37,7 @@ const navLinks = [
 
 export default function MobileMenu() {
     const [isOpen, setIsOpen] = useState(false);
-    const [mounted, setMounted] = useState(false);
     const pathname = usePathname();
-
-    useEffect(() => {
-        setMounted(true);
-    }, []);
 
     // Prevent body scroll when bottom sheet is open
     useEffect(() => {
@@ -57,9 +51,7 @@ export default function MobileMenu() {
         };
     }, [isOpen]);
 
-    if (!mounted) return null;
-
-    return createPortal(
+    return (
         <div className="md:hidden">
             {/* BOTTOM NAV BAR */}
             <div className="fixed bottom-0 left-0 w-full z-90 bg-surface-container-lowest/85 backdrop-blur-3xl border-t border-white/5 pb-[env(safe-area-inset-bottom,12px)] shadow-[0_-4px_30px_rgba(0,0,0,0.3)]">
@@ -164,7 +156,6 @@ export default function MobileMenu() {
                     </div>
                 </div>
             </div>
-        </div>,
-        document.body
+        </div>
     );
 }
